@@ -45,6 +45,18 @@ const ProductDetailsPage = (props) => {
     
     <Layout>
           <div className="productDescriptionContainer">
+
+          {/* home > category > subCategory > productName */}
+          <div className="breed">
+            <ul>
+              <li><a href="/">Home</a><IoIosArrowForward /></li>
+              <li><a href="/men">Men</a><IoIosArrowForward /></li>
+              <li><a href="/">Men-new-arrivals</a><IoIosArrowForward /></li>
+              <li><a href="/">WoMen-new-arrivals</a><IoIosArrowForward /></li>
+              <li><a href="/">{product.productDetails.name}</a></li>
+            </ul>
+          </div>
+          <br/>
         <div className="flexRowPr">
         <Carousel className="prnewCar"
           showArrows={true}
@@ -77,17 +89,6 @@ const ProductDetailsPage = (props) => {
    </Carousel>
         </div>
         <div className="productDetAdj">
-
-          {/* home > category > subCategory > productName */}
-          <div className="breed">
-            <ul>
-              <li><a href="/">Home</a><IoIosArrowForward /></li>
-              <li><a href="/men">Men</a><IoIosArrowForward /></li>
-              <li><a href="/">Men-new-arrivals</a><IoIosArrowForward /></li>
-              <li><a href="/">WoMen-new-arrivals</a><IoIosArrowForward /></li>
-              <li><a href="/">{product.productDetails.name}</a></li>
-            </ul>
-          </div>
           {/* product description */}
           <div className="productDetails">
               <p className="productTitle">{product.productDetails.name}</p>
@@ -159,6 +160,7 @@ const ProductDetailsPage = (props) => {
 
         </div>
       </div>
+      <br/><br/>
     </Layout>
 
    )

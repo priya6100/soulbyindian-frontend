@@ -202,7 +202,7 @@ const Header = (props) => {
 
                 <MaterialInput
                   type="text"
-                  label="Email/Mobile Number"
+                  label="Email1/Mobile Number"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -211,7 +211,7 @@ const Header = (props) => {
                   label="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  // rightElement={<a href="#">Forgot?</a>}
+                  rightElement={<a href="#">Forgot?</a>}
                 />
                 <MaterialButton
                   title={signup ? "Register" : "Login"}
@@ -223,7 +223,7 @@ const Header = (props) => {
                   }}
                   onClick={userLogin}
                 /> 
-                {/* <p style={{ textAlign: "center" }}>OR</p>
+                <p style={{ textAlign: "center" }}>OR</p>
                 <MaterialButton
                   title="Request OTP"
                   bgColor="#ffffff"
@@ -232,7 +232,7 @@ const Header = (props) => {
                     margin: "20px 0",
                     width: '200px', marginLeft:'55px'
                   }}
-                /> */}
+                />
               </div>
             </div>
           </div>

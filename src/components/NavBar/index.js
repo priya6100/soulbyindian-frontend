@@ -15,6 +15,7 @@ import './style.css';
 import {Link, NavLink} from 'react-router-dom';
 import { FaRegUser } from 'react-icons/fa';
 import logo from '../../images/logo/logo.png';
+import Login from '../Login';
 import {
   Modal,
   MaterialInput,
@@ -439,7 +440,22 @@ export default function PrimarySearchAppBar(props) {
                   <img src={logo} alt={``} />
                  
               </span>
-              <h1>Welcome to Soulbyindian</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <h1>Welcome1 to Soulbyindian</h1>
               <div className="loginInputContainer">
                 {auth.error && (
                   <div style={{ color: "red", fontSize: 12 }}>{auth.error}</div>
@@ -472,7 +488,7 @@ export default function PrimarySearchAppBar(props) {
                   label="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  // rightElement={<a href="#">Forgot?</a>}
+                  rightElement={<a href="#">Forgot?</a>}
                 />
                 <MaterialButton
                   title={signup ? "Register" : "Login"}
@@ -484,8 +500,11 @@ export default function PrimarySearchAppBar(props) {
                   }}
                   onClick={userLogin}
                 /> 
-                {/* <p style={{ textAlign: "center" }}>OR</p>
-                <MaterialButton
+                <p style={{ textAlign: "center" }}>OR</p>
+
+                  <Login />
+
+                {/* <MaterialButton
                   title="Request OTP"
                   bgColor="#ffffff"
                   textColor="#2874f0"
@@ -493,6 +512,7 @@ export default function PrimarySearchAppBar(props) {
                     margin: "20px 0",
                     width: '200px', marginLeft:'55px'
                   }}
+            
                 /> */}
               </div>
             </div>

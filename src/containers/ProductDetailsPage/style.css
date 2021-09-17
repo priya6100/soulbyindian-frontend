@@ -188,6 +188,13 @@
         align-items: flex-start;
       
     }
+    .productDescriptionContainer .carousel-slider {
+        height: 400px;
+    }
+    .productDescriptionContainer .carousel-slider img {
+        height: auto;
+        object-fit: contain;
+    }
     .prButtonContainer{
         display: flex;
         /* flex-direction: column; */

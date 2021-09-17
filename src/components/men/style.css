@@ -201,6 +201,7 @@ img {
         width: 31%;
         margin: 15px 0;
     }
+    .cartContainer .card{ width: calc(100% - 20px);}
     .card-head {
         height: 250px;
     }
