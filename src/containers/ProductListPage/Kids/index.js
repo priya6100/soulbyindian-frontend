@@ -35,24 +35,39 @@ const Kids = (props) => {
     })
   }
   return(
-    <>
-  {
+    <div style={{display: 'flex'}}>
+      <div className="kidSec">
+        {
+          Object.keys(product.productsByPrice).map((key, index) => {
+
+          return(    
+
+            // <Card          
+            //   headerLeft ={`${props.match.params.slug} under ${priceRange[key]}`}
+            //   headerRight = {  <button onClick={()=> onLoadMore}>View All</button> }
+            //   style={{
+            //     width: 'calc(100%-40px)',
+            //     margin: '20px'
+            //   }}
+            // >
+            // </Card>
+
+            <div style={{padding: '10px'}}>
+              <h3 style={{color: "black"}}>{`${props.match.params.slug} under ${priceRange[key]}`}</h3>
+              <div style={{textAlign: "end"}}>
+              {/* {  <button onClick={()=> onLoadMore}>View All</button> } */}
+              </div>
+            </div>
+            )
+          })
+        }  
+      </div>
+      <div style={{display: "flex"}}>
+    {
       Object.keys(product.productsByPrice).map((key, index) => {
 
-       return(
-     
-
-         <Card 
-          
-          headerLeft ={`${props.match.params.slug} under ${priceRange[key]}`}
-          headerRight = {  <button onClick={()=> onLoadMore}>View All</button> }
-          style={{
-            width: 'calc(100%-40px)',
-            margin: '20px'
-          }}
-         >
-     
-         <div style={{display: 'flex'}}>
+       return(     
+         <>
            {
              product.productsByPrice[key].map(product => 
                
@@ -73,12 +88,12 @@ const Kids = (props) => {
                )
            }
         
-         </div>
-   </Card>
+         </>
        );
       })
     }
-    </>
+    </div>
+    </div>
  )
 
 }

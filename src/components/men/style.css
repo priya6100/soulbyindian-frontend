@@ -202,9 +202,9 @@ img {
         margin: 15px 0;
     }
     .cartContainer .card{ width: calc(100% - 20px);}
-    .card-head {
+    /* .card-head {
         height: 250px;
-    }
+    } */
 
     .addToCartBtn {
         width: calc(100% - 40px);

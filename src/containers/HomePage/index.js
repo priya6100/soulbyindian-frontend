@@ -7,10 +7,8 @@ import Headers from '../../components/Headers';
 import {Carousel} from 'react-bootstrap'
 import banner1 from '../../images/logo/banner-3.jpg';
 import banner2 from '../../images/logo/women-banner.jpg';
-import item1 from '../../images/3.png';
-import item2 from '../../images/logo/bag2.jpg';
-import item4 from '../../images/2.png';
-import midBanner from '../../images/1.png';
+
+import midBanner from '../../images/logo/women-banner.jpg';
 import { generatePublicUrl } from '../../urlConfig';
 import './style.css';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -21,12 +19,14 @@ import sunglass from '../../assets/dress image/Sunglasses.jpg';
 import bag from '../../assets/dress image/bag2.jpg';
 import pant from '../../assets/dress image/pant.jpg';
 import top from '../../assets/dress image/t shirt.jpg';
-import shirt from '../../assets/dress image/formal blue shirt.jpeg';
-import shoe from '../../assets/dress image/mens-denim-shirt.jpg';
-import item17 from '../../assets/dress image/gray sweater.jpg';
+// import shirt from '../../assets/dress image/formal blue shirt.jpeg';
+// import shoe from '../../assets/dress image/mens-denim-shirt.jpg';
+// import item17 from '../../assets/dress image/gray sweater.jpg';
+
 
 
 import {Link} from 'react-router-dom';
+import NewArrivalCarousel from './Carousel';
 /**
 * @author
 * @function HomePage
@@ -45,6 +45,7 @@ const HomePage = (props) => {
   }, []);
 
   
+
 
   const renderCategories = (categories) =>{
           
@@ -103,10 +104,10 @@ const HomePage = (props) => {
    
         <div className="homeCategory">
          <div>
-            <h5>{cat.name}</h5>
                 <Link to={`/${cat.name}`}>
                   <img src={cat.categoryImage} alt={cat.categoryImage} />
                 </Link>
+                <h5>{cat.name}</h5>
               
          </div>
       </div>
@@ -122,7 +123,7 @@ const HomePage = (props) => {
 </div>
 <br/><br/>
 
-      <section className="newArr" style={{width: "90%", margin: "50px auto"}}>
+      <section className="newArr" style={{ margin: "50px auto"}}>
         <div className="secHead">
        
           {/* <ThumbBtn /> */}
@@ -223,76 +224,20 @@ const HomePage = (props) => {
 
 </div>
       <section>
-
-        <div className="trendMain">
-           <div className="trend-product">
-                <div className="col">
-                  <img src={shirt} alt="" />
-                </div>
-           </div>
-           <div className="trend-product1">
-            <div className="col">
-            <img src={shoe} height="200" alt="" />
-            </div>
-            <div className="col">
-              <img src={item17} height="200" alt="" />
-            </div>
-                 
-           </div>
-        </div>
+        <NewArrivalCarousel />
+        
       </section>
       <section>
-      <div className="headding-all">
-<h2>LET THEM SPEAK FOR US !</h2>
-<p>SOME IMPRESSIONS FROM OUR CUSTOMERS!</p>
-</div>
-<Carousel>
-
-      <Carousel.Item> 
-      <div  className="d-block w-100"  style={{height: '400px'}}>
-      <Carousel.Caption className="inner-testi">
-       <div>
-       <img
-     
-     style={{backgroundColor: 'black', height: '150px', width: '150px', borderRadius:'50%', verticalAlign: 'middle'}}
-     src={banner1}
-     alt="First slide"
-   />
-       </div>
-   <div>
-   <h5>JON DEO</h5>
-      <p>
-      is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-      </p>
-   </div>
-    </Carousel.Caption>
-      </div>
-      </Carousel.Item>
- 
-      <Carousel.Item> 
-      <div  className="d-block w-100"  style={{height: '400px'}}>
-      <Carousel.Caption className="inner-testi">
-       <div>
-       <img
-     
-     style={{backgroundColor: 'black', height: '150px', width: '150px', borderRadius:'50%', verticalAlign: 'middle'}}
-     src={banner1}
-     alt="First slide"
-   />
-       </div>
-   <div>
-   <h5>JON DEO</h5>
-      <p>
-      is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-      </p>
-   </div>
-    </Carousel.Caption>
-      </div>
-      </Carousel.Item>
-  
-
-
-</Carousel>
+      <div className="mid-banner">
+          <div className="midText">
+             <h3>50% OFF</h3>
+             <p className="midText-p">All Men, Women, Kids Collection</p>
+             <button>Shop Now</button>
+          </div>
+          <div className="midImg">
+            <img src={midBanner} alt="" />
+           </div>
+        </div>
       </section>
      <Footer />
     </>

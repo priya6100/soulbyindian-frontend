@@ -21,6 +21,7 @@ import CartPage from "../CartPage";
 import AddressForm from "./AddressForm";
 import { FaRubleSign, FaRupeeSign } from 'react-icons/fa';
 import "./style.css";
+import CardPayment from "./PaymentRazorpay";
 
 /**
  * @author
@@ -455,6 +456,7 @@ useEffect(()=>{
                     <input type="radio" name="paymentOption" value="cod" />
                     <div>Cash on delivery</div>
                   </div>
+                  <button onClick={()=> CardPayment}>Pay by Credit / Debit Card</button>
                   <MaterialButton
                     title="CONFIRM ORDER"
                     onClick={onConfirmOrder}
@@ -467,6 +469,7 @@ useEffect(()=>{
               )
             }
           />
+          
         </div>
         {/* price details */}
     

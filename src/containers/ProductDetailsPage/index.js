@@ -113,11 +113,12 @@ const ProductDetailsPage = (props) => {
               <div className="pSize">
                 <p>Size</p>
                 <div className="btnGroup">
-                  <button className="sizeBtn" id="s">S</button>
+                  {/* <button className="sizeBtn" id="s">S</button>
                   <button className="sizeBtn" id="m">M</button>
                   <button className="sizeBtn" id="l">L</button>
                   <button className="sizeBtn" id="xl">XL</button>
-                  <button className="sizeBtn" id="xxl">XXL</button>
+                   <button className="sizeBtn" id="xxl">XXL</button> */}
+                   {product.productDetails.size}
                 </div>
               </div>
               <br/><br/>

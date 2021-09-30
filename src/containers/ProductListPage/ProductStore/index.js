@@ -34,13 +34,10 @@ const ProductStore = (props) => {
 
   }, []);
   return(
-      <>
-    {
-        Object.keys(product.productsByPrice).map((key, index) => {
- 
-         return(
-       
- 
+    <div style={{display: "flex", flexWrap: "wrap"}}>
+      <div>
+      {
+        Object.keys(product.productsByPrice).map((key, index) =>  
            <Card 
             
             headerLeft ={`${props.match.params.slug} under ${priceRange[key]}`}
@@ -50,8 +47,15 @@ const ProductStore = (props) => {
               margin: '20px'
             }}
            >
-       
-           <div style={{display: 'flex'}}>
+          </Card>
+        )
+      }
+      </div>
+      {
+      Object.keys(product.productsByPrice).map((key, index) => {
+      
+      return(
+          <div style={{display: 'flex'}}>
              {
                product.productsByPrice[key].product.slice(0, this.state.limitTo).map(product => 
                  
@@ -74,13 +78,12 @@ const ProductStore = (props) => {
              }
           
            </div>
-     </Card>
          );
         })
       }
-      </>
-   )
+    </div>
+  )
 
- }
+}
 
 export default ProductStore;

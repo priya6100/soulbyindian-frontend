@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
-
+import axios from 'axios';
 
 
 
@@ -17,12 +17,34 @@ const clientId = "800480683042-qdqo4a9hi5dboglr97e4tvmvab0er1lu.apps.googleuserc
 
 function Login() {
 
+    const responseSuccessGoogle = (response) => {
+        console.log(response);
+        axios({
+            method: "POST",
+            url: "http://localhost:7000/api/googlelogin",
+            data: {tokenId: response.tokenId}
+        }).then(response => {
+            console.log("Google login success" ,response);
+
+        
+        })
+    }
+
     const [showloginButton, setShowloginButton] = useState(true);
     const [showlogoutButton, setShowlogoutButton] = useState(false);
     const onLoginSuccess = (res) => {
         console.log('Login Success:', res.profileObj);
+        axios({
+            method: "POST",
+            url: "http://localhost:7000/api/googlelogin",
+            data: {tokenId: res.tokenId}
+        }).then(res => {
+            console.log("Google login success" ,res);
+
+        
         setShowloginButton(false);
         setShowlogoutButton(true);
+       })
     };
 
     const onLoginFailure = (res) => {
@@ -38,24 +60,13 @@ function Login() {
 
     return (
         <div>
-            { showloginButton ?
-                <GoogleLogin
-                    clientId={clientId}
-                    buttonText="Sign In"
-                    onSuccess={onLoginSuccess}
-                    onFailure={onLoginFailure}
-                    cookiePolicy={'single_host_origin'}
-                    isSignedIn={true}
-                /> : null}
-
-            { showlogoutButton ?
-                <GoogleLogout
-                    clientId={clientId}
-                    buttonText="Sign Out"
-                    onLogoutSuccess={onSignoutSuccess}
-                >
-                </GoogleLogout> : null
-            }
+                    <GoogleLogin
+                clientId= "800480683042-qdqo4a9hi5dboglr97e4tvmvab0er1lu.apps.googleusercontent.com"
+                buttonText="Log in with Google"
+                onSuccess={ onLoginSuccess}
+                onFailure={onLoginFailure}
+                cookiePolicy={'single_host_origin'}
+            />
         </div>
     );
 }

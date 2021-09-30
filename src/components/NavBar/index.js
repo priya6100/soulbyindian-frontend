@@ -426,15 +426,18 @@ export default function PrimarySearchAppBar(props) {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {/* {renderNonLoggedMenu}  */}
+      {renderNonLoggedMenu} 
        {auth.authenticate ? renderLoggedMenu : renderNonLoggedMenu}
       <Modal visible={loginModal} onClose={() => setLoginModal(false)}>
         <div className="authContainer">
           <div className="row">
-            {/* <div className="leftspace">
+
+            <div className="leftspace">
               <h2>Login</h2>
               <p>Get access to your Orders, Wishlist and Recommendations</p>
-            </div> */}
+            </div>
+
+
             <div className="rightspace">
               <span className="loginProfileDesign">
                   <img src={logo} alt={``} />
@@ -455,7 +458,7 @@ export default function PrimarySearchAppBar(props) {
 
 
 
-              <h1>Welcome1 to Soulbyindian</h1>
+              <h1>Welcome1 to Soulbyindian2</h1>
               <div className="loginInputContainer">
                 {auth.error && (
                   <div style={{ color: "red", fontSize: 12 }}>{auth.error}</div>

@@ -11,7 +11,7 @@ import { FaRegSave, FaRupeeSign, FaTrashAlt } from "react-icons/fa";
 const CartItem = (props) => {
   const [qty, setQty] = useState(props.cartItem.qty);
 
-  const { _id, name, price, img } = props.cartItem;
+  const { _id, name, price, img, size } = props.cartItem;
 
   const onQuantityIncrement = () => {
     setQty(qty + 1);
@@ -34,7 +34,7 @@ const CartItem = (props) => {
           <div>
             <h4>{name}</h4>
             <p>shirt:</p>
-            <p>size:</p>
+            <p>size: {size}</p>
             <button className="cartActionBtn"> <FaRegSave /> save for later</button>
         <button
           className="cartActionBtn"
