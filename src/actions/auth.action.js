@@ -38,6 +38,39 @@ export const signup = (user) => {
     };
   };
 
+  export const passwordReset = (user) => {
+    return async (dispatch) => {
+      let res;
+      try {
+        dispatch({ type: authConstants.PASSRESET_REQUEST });
+        res = await axios.post(`/forget-password`, user);
+        if (res.status === 201) {
+          dispatch({ type: authConstants.PASSRESET_SUCCESS });
+          const { token, email } = res.data;
+          localStorage.setItem("token", token);
+          localStorage.setItem("user", JSON.stringify(email));
+          dispatch({
+            type: authConstants.PASSRESET_SUCCESS,
+            payload: {
+              token,
+              email,
+            },
+          });
+        } else {
+          const { error } = res.data;
+          dispatch({ type: authConstants.PASSRESET_FAILURE, payload: { error } });
+        }
+      } catch (error) {
+        const { data } = error.response;
+        dispatch({
+          type: authConstants.PASSRESET_FAILURE,
+          payload: { error: data.error },
+        });
+      }
+    };
+  };
+
+
 export const login = (user) =>{
     return async (dispatch) =>{
 

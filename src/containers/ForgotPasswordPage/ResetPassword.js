@@ -1,24 +1,16 @@
-import React, { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import React, {useState,useContext,} from 'react';
+import {Link,useHistory} from 'react-router-dom';
 import M from 'materialize-css';
-import axios from "axios";
 
-const ForgetPassword =() => {
-    
+
+const ResetPassword = () =>{
     const history = useHistory()
-    const [email, setEmail] = useState("")
-    const PostData = (response) =>{
+    const [email,setEmail] = useState("")
+    const PostData = () =>{
         if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1 , 3}\.[0-9]{1,3}\.[0-9]{1,3\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
             M.toast({html: "invalid email", classes:"#c62828 red darken-3"})
             return
         }
-        axios({
-            method: "POST",
-            url: "http://localhost:7000/api/forgot-password",
-            data: {tokenId: response.tokenId}
-        }).then(response => {
-            console.log("password reset link send successfully.." ,response);        
-        })
     
        fetch('/reset-password',{
            method: "post",
@@ -40,21 +32,28 @@ const ForgetPassword =() => {
            }
        }).catch(err=>{
            console.log(err)
-       });
-    }
+       })
+    
+}
+return (
+    <div className="mycard">
+        <div className="card auth-card input-field">
+            <h2>Google</h2>
+            <input
+            type="text"
+            placeholder="email"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
+            />
+            <button className="btn waves-effect waves-light #64b5f6 blue darken-1"
+            onClick={()=>PostData()}
+            >
+                reset password
 
-    return (
-        <>
-        <h1>Forgot password</h1>
-
-        <form action="" method="post" >
-            <lable for="email">Email1/username</lable>
-            <input type="email" name="email" id="email"  />
-            <br/>
-            <input type="submit" value="submit" />
-        </form>
-        </>
-    )
+            </button>
+        </div>
+    </div>
+)
 }
 
-export default ForgetPassword
+export default ResetPassword;

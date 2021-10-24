@@ -2,7 +2,7 @@ import axios from "../helpers/axios";
 import { wishlistConstants } from "./constants";
 import store from "../store";
 
-const getWishlistItems = () => {
+const getWishlistItems = () => { 
   return async dispatch => {
     try {
       dispatch({ type: wishlistConstants.ADD_TO_WISHLIST_REQUEST });

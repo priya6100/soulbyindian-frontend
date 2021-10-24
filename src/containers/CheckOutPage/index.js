@@ -17,7 +17,8 @@ import {
 import PriceDetails from "../../components/PriceDetails";
 import Card from "../../components/UI/Card";
 import CartPage from "../CartPage";
-
+import Razorpay from 'razorpay';
+import axios from 'axios';
 import AddressForm from "./AddressForm";
 import { FaRubleSign, FaRupeeSign } from 'react-icons/fa';
 import "./style.css";
@@ -115,6 +116,8 @@ const Address = ({
     </div>
   );
 };
+
+const baseUrl = 'http://localhost:7000'
 
 const CheckOutPage = (props) => {
   const user = useSelector((state) => state.user);
@@ -262,6 +265,91 @@ useEffect(()=>{
     setConfirmOrder(true);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   }
+
+  const getProducts =async() => {
+    const res = await axios.get(`${baseUrl}/products`);
+    console.log(res);
+  };
+  
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const [payment, setPayment] = useState(false);
+  const [orderId, setOrderId] = useState('');
+  const [paymentId, setPaymentId] = useState('');
+  const [signature, setSignature] = useState('');
+  
+
+  const buyNow = () => {
+    // const res = await axios.get(`${baseUrl}/order/${productId}`);
+
+    const totalAmount = Object.keys(cart.cartItems).reduce(
+      (totalPrice, key) => {
+        const { price, qty } = cart.cartItems[key];
+        return totalPrice + price * qty;
+      },
+      0
+    );
+
+    const items = Object.keys(cart.cartItems).map((key) => ({
+      productId: key,
+      payablePrice: cart.cartItems[key].price,
+      purchasedQty: cart.cartItems[key].qty,
+    }));
+
+    const payload = {
+      addressId: selectedAddress._id,
+      totalAmount,
+      items,
+      paymentStatus: "pending",
+      paymentType: "card",
+    
+    };
+    console.log(payload);
+    dispatch(addOrder(payload));
+
+    const options = {
+      "key": "rzp_test_LWMywGYTPdLx4d", // Enter the Key ID generated from the Dashboard
+      "amount": totalAmount *100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "soulbyindian",
+      "image": "https://example.com/your_logo",
+      // "order_id": "order#123", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response){
+          setPaymentId(response.razorpay_payment_id);
+          setOrderId(response.razorpay_order_id);
+          setSignature(response.razorpay_signature);
+          setPayment(true);
+          setConfirmOrder(true);
+          setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      },
+      "prefill": {
+          "name": "Priyaranjan Singh ",
+          "email": "pforsingh@gmail.com",
+          "contact": "9999999999"
+      }
+    };
+    var rzp1 = new window.Razorpay(options);
+
+    rzp1.open();
+
+    rzp1.on('payment.failed', function (response){
+          alert(response.error.code);
+          alert(response.error.description);
+          alert(response.error.source);
+          alert(response.error.step);
+          alert(response.error.reason);
+          alert(response.error.metadata.order_id);
+          alert(response.error.metadata.payment_id);
+    });
+
+
+
+  }
+
+  // End of the day
 
   useEffect(() => {
     auth.authenticate && dispatch(getAddress());
@@ -446,7 +534,7 @@ useEffect(()=>{
             body={
               paymentOption && (
                 <div>
-                  <div
+                  {/* <div
                     className="flexRow"
                     style={{
                       alignItems: "center",
@@ -456,10 +544,22 @@ useEffect(()=>{
                     <input type="radio" name="paymentOption" value="cod" />
                     <div>Cash on delivery</div>
                   </div>
-                  <button onClick={()=> CardPayment}>Pay by Credit / Debit Card</button>
+
+                     <input type="radio" name="paymentOption" value="cod" />
+                        <div>Razorpay</div> */}
+                        
+                  {/* <button onClick={()=> CardPayment}>Pay by Credit / Debit Card</button> */}
                   <MaterialButton
-                    title="CONFIRM ORDER"
+                    title="Cash on delivery"
                     onClick={onConfirmOrder}
+                    style={{
+                      width: "200px",
+                      margin: "0 0 20px 20px",
+                    }}
+                  />
+                   <MaterialButton
+                    title="Razorpay"
+                    onClick={buyNow}
                     style={{
                       width: "200px",
                       margin: "0 0 20px 20px",

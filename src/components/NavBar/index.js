@@ -16,6 +16,7 @@ import {Link, NavLink} from 'react-router-dom';
 import { FaRegUser } from 'react-icons/fa';
 import logo from '../../images/logo/logo.png';
 import Login from '../Login';
+import GoogleLogin from "react-google-login";
 import {
   Modal,
   MaterialInput,
@@ -28,6 +29,7 @@ import { getAllCategory, getCartItems, login, signout, signup as _signup } from 
 // import Cart from "../UI/Cart";
 
 // import { BiUserCircle } from "react-icons/bi";
+import Data from './myData.json';
 
 const useStyles = makeStyles((theme) => ({
   
@@ -143,6 +145,7 @@ export default function PrimarySearchAppBar(props) {
     }
     
   };
+
   const logout = () => {
     dispatch(signout());
   };
@@ -329,6 +332,9 @@ export default function PrimarySearchAppBar(props) {
     </Menu>
   );
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+
   return (
     <div className={classes.grow}>
       <AppBar position="fixed" style={{backgroundColor: 'white', color:'black'}}>
@@ -350,7 +356,7 @@ export default function PrimarySearchAppBar(props) {
         <span>
         <Link exact to="/" className="logo-mm"><img src={logo} width="40" height="40" alt="" /></Link>
         </span>
-       <p>Soul by Indian</p>
+       {/* <p>Soul by Indian</p> */}
          </div>
         
           
@@ -366,8 +372,8 @@ export default function PrimarySearchAppBar(props) {
           </div>
       
           
-          <div className={classes.sectionDesktop}>
-            <div className={classes.search}>
+          <div className={classes.sectionDesktop} >
+            <div className={classes.search} style={{position: "relative"}}>
               {/* <div className="mx-3"> */}
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -380,8 +386,38 @@ export default function PrimarySearchAppBar(props) {
                   input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
+                onChange={e => setSearchTerm(e.target.value)}
               />
+            <div 
+              style={{
+                  position: "absolute", 
+                  top: "90%", 
+                  left: "0",
+                  width: "100%",
+                  backgroundColor: "#fff",
+                  // zIndex: '-1'
+              }}>
+                <ul style={{margin: "0", padding: "0", listStyle: "none"}}>
+                  
+                  { Data.product.filter((val) => {
+                    if (searchTerm === "") {
+                      return null;
+                    } else if (val.Name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                      return val.Name;
+                    }
+                  }).map(item => 
+                    <li key={item.id}>
+                      <a 
+                        href="/" 
+                        style={{color: "inherit", textDecoration: "none"}}
+                      >{item.Name}</a>
+                    </li>
+                  )}
+                </ul>
+              </div>
             </div>
+              
+              
           </div>
 
           <div className={classes.grow} />
@@ -491,7 +527,7 @@ export default function PrimarySearchAppBar(props) {
                   label="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  rightElement={<a href="#">Forgot?</a>}
+                  rightElement={<a href="/forgot-passord">Forgot?</a>}
                 />
                 <MaterialButton
                   title={signup ? "Register" : "Login"}
@@ -506,17 +542,14 @@ export default function PrimarySearchAppBar(props) {
                 <p style={{ textAlign: "center" }}>OR</p>
 
                   <Login />
-
-                {/* <MaterialButton
-                  title="Request OTP"
-                  bgColor="#ffffff"
-                  textColor="#2874f0"
-                  style={{
-                    margin: "20px 0",
-                    width: '200px', marginLeft:'55px'
-                  }}
-            
-                /> */}
+{/* 
+                                      <GoogleLogin
+                        clientId="800480683042-qdqo4a9hi5dboglr97e4tvmvab0er1lu.apps.googleusercontent.com"
+                        buttonText="Login"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+                      />, */}
               </div>
             </div>
           </div>

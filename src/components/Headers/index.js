@@ -15,6 +15,7 @@ import { getAllCategory, getCartItems, login, signout, signup as _signup } from 
 import MenuHeader from "../MenuHeader";
 import Cart from "../UI/Cart";
 import { BiUserCircle } from "react-icons/bi";
+import { Input } from "@material-ui/core";
 
 /**
  * @author
@@ -31,6 +32,8 @@ const Header = (props) => {
   const auth = useSelector((state) => state.auth);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchBy, setSearchBy] = useState("name");
 
   const category = useSelector((state) => state.category);
 
@@ -61,6 +64,8 @@ const Header = (props) => {
 
     return myCategories;
   };
+
+  
 
   const userSignup = () => {
     const user = { firstName, lastName, email, password };
@@ -164,6 +169,8 @@ const Header = (props) => {
     );
   };
 
+  // const [searchTerm, setSearchTerm] = useState('');
+
   return (
     <div className="header">
       <Modal visible={loginModal} onClose={() => setLoginModal(false)}>
@@ -265,10 +272,12 @@ const Header = (props) => {
             display: "flex",
           }}
         >
-          <div className="searchInputContainer">
+          <div className="searchInputContainer" style={{position: "relative"}}>
             <input
+              type="text"
               className="searchInput"
               placeholder={"search for products, brands and more"}
+              onChange={e => setSearchTerm(e.target.value)}
             />
             <div className="searchIconContainer">
               <IoIosSearch
@@ -277,6 +286,19 @@ const Header = (props) => {
                 }}
               />
             </div>
+
+            <div className="flexRow1" style={{position: "relative"}} >
+              <select className="select-container" defaultValue={searchBy} onChange={(e) => setSearchBy(e.target.value)}>
+                <option value={`name`}>name</option>              
+              </select>
+              <Input
+                type="text"
+                value={searchTerm}
+                placeholder={`search`}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+
           </div>
         </div>
         <div className="rightMenu">
@@ -303,9 +325,39 @@ const Header = (props) => {
             </a>
             
           </div>
+{/*           
+          <div className="smart" id="show">
+              <div className="smart-title">
+                <h1>Gene</h1> <a className="close" style="float: right; color: white; font-size: 30px; position: relative; top: -10px; right: 0;" onclick="ClickON()"></a>
+                
+                <h2>i am GNS chat bot, How may i help you <br/> <span id="time" style="color: green; font-weight: 900; font-size: 10px;"></span></h2>
+                <figure className="avatar">
+                  <img src="css/1.png"/></figure>
+              </div>
+              <div className="messages">
+            
+                <div className="messages-content"></div>
+                <div className="suggession">
+                 
+                </div>
+              
+              </div>
+              <form className="message-box" id="mymsg" method="POST">
+                <i className="fas fa-microphone" id="start-record-btn"></i>
+                <input type="text" id="MSG" name="MSG" className="message-input" placeholder="Type message..." />
+            
+               
+                <button type="submit" className="message-submit"><i className="fa fa-send-o"></i></button>
+              </form>
+              <h3 className="no-browser-support" hidden>Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>
+            </div>
+             */}
+
         </div>
       </div>
     </div>
+
+    
   );
 };
 

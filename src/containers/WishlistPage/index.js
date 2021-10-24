@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layout";
 import Card from "../../components/UI/Card";
-import WishlistItem from "./WishlistItem/index";
+import WishlistItem from "./WishlistItem";
 import { addToWishlist, getWishlistItems, removeWishlistItem } from "../../actions";
 
+import PriceDetails from "../../components/PriceDetails";
+import { MaterialButton } from "../../components/MaterialUi";
 import "./style.css";
 import { FaRupeeSign } from "react-icons/fa";
 
@@ -15,25 +17,25 @@ import { FaRupeeSign } from "react-icons/fa";
 
 /*
 Before Login
-Add product to cart
+Add product to wishlist
 save in localStorage
 when try to checkout ask for credentials and 
-if logged in then add products to users cart database from localStorage
+if logged in then add products to users wishlist database from localStorage
 */
 
 const WishlistPage = (props) => {
   const wishlist = useSelector((state) => state.wishlist);
   const auth = useSelector((state) => state.auth);
   // const wishlistItems = wishlist.wishlistItems;
-  const [wishlistItems, setwishlistItems] = useState(wishlist.wishlistItems);
+  const [wishlistItems, setWishlistItems] = useState(wishlist.wishlistItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setwishlistItems(wishlist.wishlistItems);
+    setWishlistItems(wishlist.wishlistItems);
   }, [wishlist.wishlistItems]);
 
   useEffect(() => {
-    if (auth.authenticate) {
+     if (auth.authenticate) {
       dispatch(getWishlistItems());
     }
   }, [auth.authenticate]);
@@ -71,7 +73,8 @@ const WishlistPage = (props) => {
   return (
     <Layout>
       <div className="wishlistContainer">
-        <Card
+
+      <Card
           headerLeft={`My wishlist`}
           // headerRight={<div>Deliver to</div>}
          
@@ -85,9 +88,9 @@ const WishlistPage = (props) => {
               onRemovewishlistItem={onRemovewishlistItem}
             />
           ))}
-
-          <div className="WishlistPriceMobile">
-            <div className="WishlistPriceMobileInner">
+          
+          <div className="wishlistPriceMobile">
+            <div className="wishlistPriceMobileInner">
             <h4> <FaRupeeSign />
             {Object.keys(wishlist.wishlistItems).reduce((totalPrice, key) => {
             const { price, qty } = wishlist.wishlistItems[key];
@@ -97,9 +100,28 @@ const WishlistPage = (props) => {
         
             <a href="#pricemobiledetails">View Details</a>
             </div>
+            <div style={{ width: "150px" }}>
+              <MaterialButton
+                title="PLACE ORDER"
+                onClick={() => props.history.push(`/checkout`)}
+              />
+            </div>
           </div>
           <div id="pricemobiledetails"></div>
         </Card>
+    
+        <PriceDetails
+          totalItem={Object.keys(wishlist.wishlistItems).reduce(function (qty, key) {
+            return qty + wishlist.wishlistItems[key].qty;
+          }, 0)}
+          totalPrice={Object.keys(wishlist.wishlistItems).reduce((totalPrice, key) => {
+            const { price, qty } = wishlist.wishlistItems[key];
+            return totalPrice + price * qty;
+          }, 0)}
+          onClick={() => props.history.push(`/checkout`)}
+          title={`Place Order`}
+        />
+     
         
       </div>
     </Layout>

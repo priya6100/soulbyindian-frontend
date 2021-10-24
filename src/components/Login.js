@@ -1,16 +1,6 @@
-
 import React, { useState } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-
 import axios from 'axios';
-
-
-
-
-
-
-
-
 
 
 const clientId = "800480683042-qdqo4a9hi5dboglr97e4tvmvab0er1lu.apps.googleusercontent.com";
@@ -24,12 +14,13 @@ function Login() {
             url: "http://localhost:7000/api/googlelogin",
             data: {tokenId: response.tokenId}
         }).then(response => {
-            console.log("Google login success" ,response);
-
-        
+            console.log("Google login success" ,response);        
         })
     }
 
+    const responseErrorGoogle = (response) => {
+        
+    }
     const [showloginButton, setShowloginButton] = useState(true);
     const [showlogoutButton, setShowlogoutButton] = useState(false);
     const onLoginSuccess = (res) => {
@@ -63,8 +54,8 @@ function Login() {
                     <GoogleLogin
                 clientId= "800480683042-qdqo4a9hi5dboglr97e4tvmvab0er1lu.apps.googleusercontent.com"
                 buttonText="Log in with Google"
-                onSuccess={ onLoginSuccess}
-                onFailure={onLoginFailure}
+                onSuccess={responseSuccessGoogle}
+                onFailure={responseErrorGoogle}
                 cookiePolicy={'single_host_origin'}
             />
         </div>

@@ -51,12 +51,12 @@ const ProductDetailsPage = (props) => {
             <ul>
               <li><a href="/">Home</a><IoIosArrowForward /></li>
               <li><a href="/men">Men</a><IoIosArrowForward /></li>
-              <li><a href="/">Men-new-arrivals</a><IoIosArrowForward /></li>
-              <li><a href="/">WoMen-new-arrivals</a><IoIosArrowForward /></li>
               <li><a href="/">{product.productDetails.name}</a></li>
             </ul>
           </div>
           <br/>
+
+        <div className="productContainer">
         <div className="flexRowPr">
         <Carousel className="prnewCar"
           showArrows={true}
@@ -70,10 +70,7 @@ const ProductDetailsPage = (props) => {
           thumbWidth={50}
           showIndicators={false}
           dynamicHeight={500}
-          >
-  
-
-           
+          >           
 
       {
       product.productDetails.productPictures.map((pod, index) => 
@@ -159,6 +156,7 @@ const ProductDetailsPage = (props) => {
           </div>
           
 
+        </div>
         </div>
       </div>
       <br/><br/>

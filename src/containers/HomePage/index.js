@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCategory, getProducts } from '../../actions';
 import Layout from '../../components/Layout';
@@ -22,11 +22,12 @@ import top from '../../assets/dress image/t shirt.jpg';
 // import shirt from '../../assets/dress image/formal blue shirt.jpeg';
 // import shoe from '../../assets/dress image/mens-denim-shirt.jpg';
 // import item17 from '../../assets/dress image/gray sweater.jpg';
-
+import Slider from '../../components/Slider';
 
 
 import {Link} from 'react-router-dom';
 import NewArrivalCarousel from './Carousel';
+import ChatBot from '../../components/Headers/ChatBot';
 /**
 * @author
 * @function HomePage
@@ -34,7 +35,7 @@ import NewArrivalCarousel from './Carousel';
 
 const HomePage = (props) => {
   const category = useSelector(state => state.category);
-  const product = useSelector(state => state.product);
+  const product = useSelector(state => state.product);   
  
   console.log(category, ">>cate");
   const dispatch = useDispatch();
@@ -42,10 +43,7 @@ const HomePage = (props) => {
 
   useEffect(() => {
     dispatch(getAllCategory())
-  }, []);
-
-  
-
+  }, []);  
 
   const renderCategories = (categories) =>{
           
@@ -116,6 +114,8 @@ const HomePage = (props) => {
       )
   }
 </div>
+
+<ChatBot/>
 
 <br /> <br /> <br /> <br />
 <div className="headding-all">
@@ -204,7 +204,9 @@ const HomePage = (props) => {
         </div>
       </section>
 
-     
+      <br/>
+      <Slider />
+      <br/>
     
       <section>
         <div className="mid-banner">

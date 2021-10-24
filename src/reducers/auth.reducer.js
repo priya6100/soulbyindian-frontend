@@ -52,14 +52,35 @@ export default(state = initialState, action) => {
                  
                 }
                 break;
-                case authConstants.LOGOUT_FAILURE:
-                    state= {
-                      ...state,
-                      error: action.payload.error,
-                      loading: false
-                     
-                    }
-                    break;
+            case authConstants.LOGOUT_FAILURE:
+                state= {
+                    ...state,
+                    error: action.payload.error,
+                    loading: false
+                    
+                }
+                break;
+                case authConstants.PASSRESET_REQUIEST:
+                 state= {
+                   ...state,
+                   loading: true
+                  
+                 }
+                 break;
+                 case authConstants.PASSRESET_SUCCESS:
+                     state= {
+                       ...initialState
+                      
+                     }
+                     break;
+                 case authConstants.PASSRESET_FAILURE:
+                     state= {
+                         ...state,
+                         error: action.payload.error,
+                         loading: false
+                         
+                     }
+                     break;
     }
 
     return state;

@@ -27,7 +27,7 @@ const WishlistItem = (props) => {
   return (
     <div className="wishlistItemContainer">
       <div className="flexRow-WishlistItem">
-        <div className="cartProImgContainer">
+        <div className="wishlistImgContainer">
           <img  src={generatePublicUrl(img)} alt={""} />
         </div>
         <div className="wishlistItemDetails">
@@ -41,18 +41,10 @@ const WishlistItem = (props) => {
         >
          <FaTrashAlt/> Remove
         </button>
-        <span className="CartItPrice">
+        <span className="wishlistPrice">
           <FaRupeeSign /> {price}
         </span>
           </div>
-          <div className="rgtContainer">
-          <div className="quantityControl">
-          <button onClick={onQuantityDecrement}>-</button>
-          <input value={qty} readOnly />
-          <button onClick={onQuantityIncrement}>+</button>
-        </div>
-      
-      </div>
        
         </div>
       </div>
